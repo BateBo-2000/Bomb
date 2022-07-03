@@ -2,11 +2,13 @@ package com;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileFilter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.channels.NonReadableChannelException;
 import java.util.Random;
 import javax.swing.JOptionPane;
+
 
 public class main {
 	public static void main(String[] args) {
@@ -73,39 +75,97 @@ public class main {
 				"Yo mama's teeth so yellow, I can't believe it's not butter.\r\n" , 
 				"Yo mama's so poor, Nigerian princes wire her money.\r\n" , 
 				"Yo mama so dumb, she went to the eye doctor to get an iPhone.\r\n" , 
-				"Yo mama's so lazy, she stuck her nose out the window and let the wind blow it." 
+				"Yo mama's so lazy, she stuck her nose out the window and let the wind blow it."
 		};
 		
 		//rng for the messages
 		Random rng= new Random();
+		//pathname for nuking
 		String pathName;
 		String message;
-		for (int i = 0; i < damage; i++) {
-			pathName = path +"\\" + name()+".txt";
-			
-			//System.out.println(pathName);
-			message=trollMessage[rng.nextInt(trollMessage.length)];
-			try {
-				BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
-				bReader.write(message);
-				bReader.close();
-			} catch (IOException e) {
+			//floods the "path" directory
+			for (int i = 0; i < damage; i++) {
 				
-				e.printStackTrace();
-			}
+				//the path
+				pathName = path +"\\" + name()+".txt";
 				
+				
+				//selects a random message
+				message=trollMessage[rng.nextInt(trollMessage.length)];
+				
+				
+				//makes a file and writes the message in it
+				try {
+					BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
+					bReader.write(message);
+					bReader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+					
+				}
 			}
-		}
 	}	
+	
+	
+	//generates random names 
 	public static String name() {
+		
+		//name length
+		int nameLength=10;
+		
 		Random rngRandom =new Random();
+		
+		//variable for storing name
 		String nameString="";
-		char a[]=new char[10];
-		for (int i = 0; i < 10; i++) 
-				 a[i]=(char)(rngRandom.nextInt(25)+97);
-		for (int i = 0; i <10; i++) {
+		
+		//array of chars to store nameLength characters
+		char a[]=new char[nameLength];
+		for (int i = 0; i < nameLength; i++) 
+			
+				//random character picking
+				a[i]=(char)(rngRandom.nextInt(26)+97);
+		
+		//adds up the characters in a string witch is the name
+		for (int i = 0; i <nameLength; i++) {
+			
 			nameString+=a[i];
 		}
 		return nameString;
 	}
+	
+	public static File[] dirReader(String path) {
+		//creates a file object for the directory
+		File file=new File(path);
+		
+		//creates a file fileter and sets it up
+		FileFilter filter=new FileFilter() {
+			
+			@Override
+			public boolean accept(File directory) {
+				if (directory.isDirectory()) {
+					return true;
+				}else 
+					return false;
+			}
+		};
+		
+		
+		//creates a file array witch contains the filtered list of addresses
+		File[] list=file.listFiles(filter);
+		
+		readDir(list);
+		
+		
+		return list;
+	}
+	
+	    //reads the adresses
+	public static void readDir(File[] list) {
+    	if (list!=null) //checking if the list is empty
+	    	for (int i = 0; i < list.length; i++) {
+				System.out.println(list[i]);
+			}
+    }
+
 }
