@@ -12,14 +12,127 @@ import javax.swing.JOptionPane;
 
 public class main {
 	public static void main(String[] args) {
+		//getting the path to start
 		String path = JOptionPane.showInputDialog("Where to drop the bomb? \nExample:C:\\Users\\PC\\Desktop");
 		if (path!=null && path.length()>1) {
+			//getting the damage count
+			int damage = Integer.parseInt(JOptionPane.showInputDialog("HOW MUCH"));
+			//safety mechanism
+			String safety=JOptionPane.showInputDialog("type:CONFIRM");
+			if (safety.equals("CONFIRM")) {
+					System.out.println("boom!");
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+			}
+		}	
+	}
+	
+	//generates random names 
+	public static String name() {
+		
+		//name length
+		int nameLength=10;
+		
+		Random rngRandom =new Random();
+		
+		//variable for storing name
+		String nameString="";
+		
+		//array of chars to store nameLength characters
+		char a[]=new char[nameLength];
+		for (int i = 0; i < nameLength; i++) 
 			
+				//random character picking
+				a[i]=(char)(rngRandom.nextInt(26)+97);
 		
-		int damage = Integer.parseInt(JOptionPane.showInputDialog("HOW MUCH"));
+		//adds up the characters in a string witch is the name
+		for (int i = 0; i <nameLength; i++) {
+			
+			nameString+=a[i];
+		}
+		return nameString;
+	}
+	
+	//returns list with only the directories form the "path" / location
+	public static File[] dirReader(String path) {
+		//creates a file object for the directory
+		File file=new File(path);
+		
+		//creates a file fileter and sets it up
+		FileFilter filter=new FileFilter() {
+			
+			@Override
+			public boolean accept(File directory) {
+				if (directory.isDirectory()) {
+					return true;
+				}else 
+					return false;
+			}
+		};
 		
 		
+		//creates a file array witch contains the filtered list of addresses
+		File[] list=file.listFiles(filter);
 		
+		/*	methood readDir(File[])
+		 * 	is just for reading and testing out this method
+		 */
+		//readDir(list);
+
+		return list;
+	}
+	
+	//returns all folders
+	public static void readDir(File[] list) {
+    	if (list!=null) //checking if the list is empty
+	    	for (int i = 0; i < list.length; i++) {
+				System.out.println(list[i]);
+			}
+    }
+	
+	//floods the directory
+	public static void flood(int damage, String trollMessage[] , String path) {
+			
+			
+			//rng for the messages
+			Random rng= new Random();
+			//pathname for nuking
+			String pathName;
+			String message;
+			
+			for (int i = 0; i < damage; i++) {
+				
+				//name of the file
+				pathName = path +"\\" + name()+".txt";
+				
+				
+				//selects a random message
+				message=trollMessage[rng.nextInt(trollMessage.length)];
+				
+				
+				//makes a file and writes the message in it
+		try {
+				BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
+				bReader.write(message);
+				bReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}		
+		}
+	}
+
+	//returns the troll messages
+	public static String[] messageList() {
 		String trollMessage[] = {
 				"Yo mama's so fat, when she fell I didn't laugh, but the sidewalk cracked up.\r\n", 
 				"Yo mama's so fat, when she skips a meal, the stock market drops.\r\n" ,
@@ -77,94 +190,11 @@ public class main {
 				"Yo mama so dumb, she went to the eye doctor to get an iPhone.\r\n" , 
 				"Yo mama's so lazy, she stuck her nose out the window and let the wind blow it."
 		};
-		
-		//rng for the messages
-		Random rng= new Random();
-		//pathname for nuking
-		String pathName;
-		String message;
-			//floods the "path" directory
-			for (int i = 0; i < damage; i++) {
-				
-				//the path
-				pathName = path +"\\" + name()+".txt";
-				
-				
-				//selects a random message
-				message=trollMessage[rng.nextInt(trollMessage.length)];
-				
-				
-				//makes a file and writes the message in it
-				try {
-					BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
-					bReader.write(message);
-					bReader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-					
-				}
-			}
-	}	
-	
-	
-	//generates random names 
-	public static String name() {
-		
-		//name length
-		int nameLength=10;
-		
-		Random rngRandom =new Random();
-		
-		//variable for storing name
-		String nameString="";
-		
-		//array of chars to store nameLength characters
-		char a[]=new char[nameLength];
-		for (int i = 0; i < nameLength; i++) 
-			
-				//random character picking
-				a[i]=(char)(rngRandom.nextInt(26)+97);
-		
-		//adds up the characters in a string witch is the name
-		for (int i = 0; i <nameLength; i++) {
-			
-			nameString+=a[i];
-		}
-		return nameString;
+		return trollMessage;
 	}
 	
-	public static File[] dirReader(String path) {
-		//creates a file object for the directory
-		File file=new File(path);
+	//controls the damage spread covering all of the folders inside
+	public static void Controler() {
 		
-		//creates a file fileter and sets it up
-		FileFilter filter=new FileFilter() {
-			
-			@Override
-			public boolean accept(File directory) {
-				if (directory.isDirectory()) {
-					return true;
-				}else 
-					return false;
-			}
-		};
-		
-		
-		//creates a file array witch contains the filtered list of addresses
-		File[] list=file.listFiles(filter);
-		
-		readDir(list);
-
-		return list;
 	}
-	
-	    //reads the adresses
-	public static void readDir(File[] list) {
-    	if (list!=null) //checking if the list is empty
-	    	for (int i = 0; i < list.length; i++) {
-				System.out.println(list[i]);
-			}
-    }
-
 }
