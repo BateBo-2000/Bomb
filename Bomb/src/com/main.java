@@ -155,8 +155,7 @@ public class main {
 		File[] list=file.listFiles(filter);
 		
 		readDir(list);
-		
-		
+
 		return list;
 	}
 	
