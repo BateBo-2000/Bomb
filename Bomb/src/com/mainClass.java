@@ -1,6 +1,5 @@
 package com;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -10,7 +9,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 
-public class main {
+public class mainClass {
 	public static void main(String[] args) {
 		//getting the path to start
 		String path = JOptionPane.showInputDialog("Where to drop the bomb? \nExample:C:\\Users\\PC\\Desktop");
@@ -24,6 +23,7 @@ public class main {
 					
 				//creates a file object for the directory
 				File file=new File(path);
+				
 				//starts the controller at the start location
 				Controler(file,damage,messageList());					
 			}
