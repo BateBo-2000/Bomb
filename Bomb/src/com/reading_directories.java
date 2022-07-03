@@ -7,13 +7,20 @@ import java.io.FileFilter;
 public class reading_directories {
     public static void main(String[] args) {
     	String pathString="C:\\Users\\PC\\Desktop\\test";
-    	dirReader2(pathString);
+    	File file=new File(pathString);
+    	File[] list = dirReader2(file);
+    	
+    	System.out.println(list.length);
+    	for (int i = 0; i < list.length; i++) {
+			System.out.println(list[i]);
+		}
+    	
     	
     }
     //testing 
-    public static String[] dirReader2(String path) {
+    public static File[] dirReader2(File file) {
 		//creates a file object for the directory
-		File file=new File(path);
+		
 		
 		//creates a file fileter and sets it up
 		FileFilter filter=new FileFilter() {
@@ -35,7 +42,7 @@ public class reading_directories {
 		read(list);
 		
 		
-		return null;
+		return list;
 	}
     //reads the adresses
     public static void read(File[] list) {
