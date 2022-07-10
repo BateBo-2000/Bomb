@@ -104,7 +104,7 @@ public class mainClass {
 			for (int i = 0; i < damage; i++) {
 				
 				//name of the file
-				pathName = path +"\\" + name()+".txt";
+				pathName = path +"\\" + name();
 				
 				
 				//selects a random message
@@ -113,7 +113,12 @@ public class mainClass {
 				
 				//makes a file and writes the message in it
 		try {
-				BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
+				//creates a folder
+				File folderFile= new File(pathName);
+				folderFile.mkdir();
+				
+				// creates a txt file
+				BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName+".txt"));
 				bReader.write(message);
 				bReader.close();
 			} catch (IOException e) {
