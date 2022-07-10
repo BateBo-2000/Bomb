@@ -124,6 +124,10 @@ public class Main extends JFrame {
 		chckbxmkv.setBounds(105, 222, 97, 23);
 		contentPane.add(chckbxmkv);
 		
+		JCheckBox chckbxRandom = new JCheckBox("random");
+		chckbxRandom.setBounds(204, 118, 97, 23);
+		contentPane.add(chckbxRandom);
+		
 		JLabel lblTitle = new JLabel("Bomb 2.0");
 		lblTitle.setFont(new Font("Consolas", Font.BOLD, 25));
 		lblTitle.setBounds(10, 11, 414, 37);
@@ -235,7 +239,7 @@ public class Main extends JFrame {
 					} catch (Exception e2) {
 						System.out.println("incorrect number");
 					}
-					
+					NUKE();
 					System.out.println("Boom!");
 					
 				}
@@ -243,5 +247,16 @@ public class Main extends JFrame {
 		});
 		btnNuke.setBounds(335, 227, 89, 23);
 		contentPane.add(btnNuke);
+		
 	}	
+	
+	public void NUKE() {
+		//creates a 
+		Util utility = new Util();
+		File file=new File(path);		
+		//starts the controller at the start location
+		utility.Controler(file,damage,utility.messageList());	
+		
+		
+	}
 }

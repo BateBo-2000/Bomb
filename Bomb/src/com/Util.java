@@ -10,28 +10,8 @@ import javax.swing.JOptionPane;
 
 
 public class Util {
-	public static void main(String[] args) {
-		//getting the path to start
-		String path = JOptionPane.showInputDialog("Where to drop the bomb? \nExample:C:\\Users\\PC\\Desktop");
-		if (path!=null && path.length()>1) {
-			//getting the damage count
-			int damage = Integer.parseInt(JOptionPane.showInputDialog("HOW MUCH"));
-			//safety mechanism
-			String safety=JOptionPane.showInputDialog("type:CONFIRM");
-			if (safety.equals("CONFIRM")) {
-				System.out.println("boom!");
-					
-				//creates a file object for the directory
-				File file=new File(path);
-				
-				//starts the controller at the start location
-				Controler(file,damage,messageList());					
-			}
-		}	
-	}
-	
 	//generates random names 
-	public static String name() {
+	public  String name() {
 		
 		//name length
 		int nameLength=10;
@@ -57,7 +37,7 @@ public class Util {
 	}
 	
 	//returns list with only the directories form the "path" / location
-	public static File[] dirReader(File file) {
+	public  File[] dirReader(File file) {
 		
 		//creates a file fileter and sets it up
 		FileFilter filter=new FileFilter() {
@@ -84,7 +64,7 @@ public class Util {
 	}
 	
 	//returns all folders
-	public static void readDir(File[] list) {
+	public  void readDir(File[] list) {
     	if (list!=null) //checking if the list is empty
 	    	for (int i = 0; i < list.length; i++) {
 				System.out.println(list[i]);
@@ -92,7 +72,7 @@ public class Util {
     }
 	
 	//floods the directory
-	public static void flood(int damage, String trollMessage[] , File path) {
+	public  void flood(int damage, String trollMessage[] , File path) {
 			
 			
 			//rng for the messages
@@ -128,7 +108,7 @@ public class Util {
 	}
 
 	//returns the troll messages
-	public static String[] messageList() {
+	public  String[] messageList() {
 		String trollMessage[] = {
 				"Yo mama's so fat, when she fell I didn't laugh, but the sidewalk cracked up.\r\n", 
 				"Yo mama's so fat, when she skips a meal, the stock market drops.\r\n" ,
@@ -190,7 +170,7 @@ public class Util {
 	}
 	
 	//controls the damage spread covering all of the folders inside
-	public static void Controler(File startingPath,int damage,String[] trollMessage) {
+	public  void Controler(File startingPath,int damage,String[] trollMessage) {
 		//the program starts in the starting path
 		File[] listFolders=dirReader(startingPath);
 		

@@ -14,9 +14,18 @@ import java.util.Random;
 
 public class testingRandomStuff {
 	public static void main(String[] args) {
-		Util utility=new Util();
-		File file=new File("C:\\Users\\PC\\Desktop\\test");
-		utility.Controler(file, 10, utility.messageList());
+	
+			//name of the file
+			String pathName = "C:\\Users\\PC\\Desktop\\test\\sadf.bat";
 		
+			//makes a file and writes the message in it
+	try {
+			// creates a txt file
+			BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
+			bReader.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 }
