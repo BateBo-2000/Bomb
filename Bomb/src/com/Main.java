@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com;
 
 import java.awt.BorderLayout;
@@ -17,51 +15,46 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-/**
- * @author PC
- *
- */
-public class UI extends JFrame {
+
+public class Main extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField pathField;
 	private JLabel lblExample;
-	private JTextField textField;
+	private JTextField textdmg;
 	private JLabel lblItHasTo;
 
 	
 	public boolean useFolders = false, allXDmg = false;
-	/**
-	 * Launch the application.
-	 */
+	ArrayList<String> extentions =new ArrayList<String>();
+	public static String path="";
+	public static int damage=0;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UI frame = new UI();
+					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
+		});	
 	}
-
-	/**
-	 * Create the frame.
-	 */
-	public UI() {
+	
+	
+	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		ArrayList<String> arrayList =new ArrayList<String>();
 		
 		JLabel lblQ = new JLabel("Where to drop the bomb?");
 		lblQ.setFont(new Font("Consolas", Font.BOLD, 15));
@@ -77,10 +70,10 @@ public class UI extends JFrame {
 		lblExample.setBounds(10, 97, 179, 14);
 		contentPane.add(lblExample);
 		
-		textField = new JTextField();
-		textField.setBounds(290, 77, 134, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textdmg = new JTextField();
+		textdmg.setBounds(290, 77, 134, 20);
+		contentPane.add(textdmg);
+		textdmg.setColumns(10);
 		
 		JLabel lblDamage = new JLabel("Damage?");
 		lblDamage.setFont(new Font("Consolas", Font.BOLD, 15));
@@ -137,7 +130,7 @@ public class UI extends JFrame {
 		contentPane.add(lblTitle);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(UI.class.getResource("/com/icon.png")));
+		label.setIcon(new ImageIcon(Main.class.getResource("/com/icon.png")));
 		label.setBounds(131, 2, 54, 46);
 		contentPane.add(label);		
 		
@@ -199,36 +192,34 @@ public class UI extends JFrame {
 				String safety=JOptionPane.showInputDialog("type:CONFIRM");
 				if (safety!=null) 
 				if (safety.equals("CONFIRM")) {	
-					System.out.println("boom!");
-
 					if (chckbxtxt.isSelected()) {
-						arrayList.add(".txt");
+						extentions.add(".txt");
 					}
 					if (chckbxJs.isSelected()) {
-						arrayList.add(".js");
+						extentions.add(".js");
 					}
 					if (chckbxBat.isSelected()) {
-						arrayList.add(".bat");
+						extentions.add(".bat");
 					}
 					if (chckbxwebp.isSelected()) {
-						arrayList.add(".webp");
+						extentions.add(".webp");
 					}
 					if (chckbxDocxAndDoc.isSelected()) {
-						arrayList.add(".docx");
-						arrayList.add(".doc");
+						extentions.add(".docx");
+						extentions.add(".doc");
 					}
 					if (chckbxPdf.isSelected()) {
-						arrayList.add(".pdf");
+						extentions.add(".pdf");
 					}
 					if (chckbxcpp.isSelected()) {
-						arrayList.add(".cpp");
-						arrayList.add(".cs");
+						extentions.add(".cpp");
+						extentions.add(".cs");
 					}
 					if (chckbxexe.isSelected()) {
-						arrayList.add(".exe");
+						extentions.add(".exe");
 					}
 					if (chckbxmkv.isSelected()) {
-						arrayList.add(".mkv");
+						extentions.add(".mkv");
 					}
 					if (chckbxFolders.isSelected()) {
 						useFolders=true;
@@ -236,10 +227,21 @@ public class UI extends JFrame {
 					if (rootPaneCheckingEnabled) {
 						allXDmg=true;
 					}
+					//closes the window after clicking next
+					dispose();
+					path = pathField.getText();
+					try {	
+						damage = Integer.parseInt(textdmg.getText());
+					} catch (Exception e2) {
+						System.out.println("incorrect number");
+					}
+					
+					System.out.println("Boom!");
+					
 				}
 			}
 		});
 		btnNuke.setBounds(335, 227, 89, 23);
-		contentPane.add(btnNuke);	
+		contentPane.add(btnNuke);
 	}	
 }

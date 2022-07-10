@@ -9,7 +9,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 
-public class mainClass {
+public class Util {
 	public static void main(String[] args) {
 		//getting the path to start
 		String path = JOptionPane.showInputDialog("Where to drop the bomb? \nExample:C:\\Users\\PC\\Desktop");

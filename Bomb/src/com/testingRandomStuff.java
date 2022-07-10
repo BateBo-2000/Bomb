@@ -14,18 +14,9 @@ import java.util.Random;
 
 public class testingRandomStuff {
 	public static void main(String[] args) {
-	
-			//name of the file
-			String pathName = "C:\\Users\\PC\\Desktop\\test\\sadf.pdf";
+		Util utility=new Util();
+		File file=new File("C:\\Users\\PC\\Desktop\\test");
+		utility.Controler(file, 10, utility.messageList());
 		
-			//makes a file and writes the message in it
-	try {
-			// creates a txt file
-			BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
-			bReader.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
 	}
 }
