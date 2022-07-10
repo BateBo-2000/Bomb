@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JCheckBox;
@@ -24,13 +25,15 @@ import java.awt.event.ActionEvent;
  *
  */
 public class UI extends JFrame {
-
+	
 	private JPanel contentPane;
 	private JTextField pathField;
 	private JLabel lblExample;
 	private JTextField textField;
 	private JLabel lblItHasTo;
 
+	
+	public boolean useFolders = false, allXDmg = false;
 	/**
 	 * Launch the application.
 	 */
@@ -150,7 +153,21 @@ public class UI extends JFrame {
 		JButton btnSelectAll = new JButton("select all");
 		btnSelectAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				chckbxtxt.setSelected(true);
+				chckbxmkv.setSelected(true);
+				chckbxexe.setSelected(true);
+				chckbxcpp.setSelected(true);
+				chckbxPdf.setSelected(true);
+				chckbxDocxAndDoc.setSelected(true);
+				chckbxwebp.setSelected(true);
+				chckbxBat.setSelected(true);
+				chckbxJs.setSelected(true);
+				chckbxFolders.setSelected(true);
+				
 			}
+			
 		});
 		btnSelectAll.setBounds(335, 118, 89, 23);
 		contentPane.add(btnSelectAll);
@@ -158,6 +175,18 @@ public class UI extends JFrame {
 		JButton btnDeselectAll = new JButton("deselect all");
 		btnDeselectAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				chckbxtxt.setSelected(false);
+				chckbxmkv.setSelected(false);
+				chckbxexe.setSelected(false);
+				chckbxcpp.setSelected(false);
+				chckbxPdf.setSelected(false);
+				chckbxDocxAndDoc.setSelected(false);
+				chckbxwebp.setSelected(false);
+				chckbxBat.setSelected(false);
+				chckbxJs.setSelected(false);
+				chckbxFolders.setSelected(false);
+				
 			}
 		});
 		btnDeselectAll.setBounds(335, 144, 89, 23);
@@ -166,39 +195,48 @@ public class UI extends JFrame {
 		JButton btnNuke = new JButton("Nuke");
 		btnNuke.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (chckbxtxt.isSelected()) {
-					arrayList.add("");
-				}
-				if (rootPaneCheckingEnabled) {
-					arrayList.add("");
-				}
-				if (rootPaneCheckingEnabled) {
-					arrayList.add("");
-				}
-				
-				
+				//safety mechanism
+				String safety=JOptionPane.showInputDialog("type:CONFIRM");
+				if (safety!=null) 
+				if (safety.equals("CONFIRM")) {	
+					System.out.println("boom!");
 
+					if (chckbxtxt.isSelected()) {
+						arrayList.add(".txt");
+					}
+					if (chckbxJs.isSelected()) {
+						arrayList.add(".js");
+					}
+					if (chckbxBat.isSelected()) {
+						arrayList.add(".bat");
+					}
+					if (chckbxwebp.isSelected()) {
+						arrayList.add(".webp");
+					}
+					if (chckbxDocxAndDoc.isSelected()) {
+						arrayList.add(".docx");
+						arrayList.add(".doc");
+					}
+					if (chckbxPdf.isSelected()) {
+						arrayList.add(".pdf");
+					}
+					if (chckbxcpp.isSelected()) {
+						arrayList.add(".cpp");
+						arrayList.add(".cs");
+					}
+					if (chckbxexe.isSelected()) {
+						arrayList.add(".exe");
+					}
+					if (chckbxmkv.isSelected()) {
+						arrayList.add(".mkv");
+					}
+					if (chckbxFolders.isSelected()) {
+						useFolders=true;
+					}
+					if (rootPaneCheckingEnabled) {
+						allXDmg=true;
+					}
+				}
 			}
 		});
 		btnNuke.setBounds(335, 227, 89, 23);
