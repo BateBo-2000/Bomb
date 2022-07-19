@@ -1,8 +1,12 @@
 
 package com;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class DamageGenerator {
 	int damage;
@@ -27,9 +31,18 @@ public class DamageGenerator {
 		this.path = path;
 	}
 	
-	
-	
-	
-	
+	public void DoDamage() {
+		
+		if (random) {
+			
+		}
+		if (doomsDayMode) {
+			
+		}
+		if (delete) {
+			
+		}
+		
+	}
 	
 }
