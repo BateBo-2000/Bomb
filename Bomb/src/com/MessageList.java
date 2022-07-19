@@ -56,4 +56,8 @@ public class MessageList {
 			"Yo mama so dumb, she went to the eye doctor to get an iPhone.\r\n",
 			"Yo mama's so lazy, she stuck her nose out the window and let the wind blow it." };
 
+	public String[] getTrollMessage() {
+		return trollMessage;
+	}
+
 }

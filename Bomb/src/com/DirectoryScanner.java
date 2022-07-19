@@ -10,7 +10,7 @@ public class DirectoryScanner {
 		file = f;
 	}
 
-	public File[] name() {
+	public File[] Directories() {
 		// creates a file fileter and sets it up
 		MyDirectoryFilter myDirectoryFilter = new MyDirectoryFilter();
 		FileFilter filter = myDirectoryFilter.Filter();

@@ -3,8 +3,8 @@ package com;
 import java.util.Random;
 
 public class StringGenerator {
-	int stringLength, charLeftLimit = 48, charRightLimit = 122;
-
+	int stringLength, charLeftLimit = 65, charRightLimit = 123;
+	
 	public StringGenerator(int length, int leftLimit, int rightlimit) {
 		stringLength = length;
 		charLeftLimit = leftLimit;
@@ -28,11 +28,13 @@ public class StringGenerator {
 		stringLength = length;
 	}
 
+	
 	public String generateString() {
 		Random rng = new Random();
 		String result = "";
+		int usableRange = charRightLimit-charLeftLimit;
 		for (int i = 0; i < stringLength + 1; i++) {
-			result += Character.toString((char) (rng.nextInt(charLeftLimit) + charRightLimit));
+			result += Character.toString((char) (rng.nextInt(usableRange) + charLeftLimit));
 		}
 		return result;
 	}

@@ -16,16 +16,10 @@ public class testingRandomStuff {
 	public static void main(String[] args) {
 	
 			//name of the file
-			String pathName = "C:\\Users\\PC\\Desktop\\test\\sadf.bat";
-		
-			//makes a file and writes the message in it
-	try {
-			// creates a txt file
-			BufferedWriter bReader=new BufferedWriter(new FileWriter(pathName));
-			bReader.close();
+			String pathName = "C:\\Users\\PC\\Desktop\\test";
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
+			File f = new File(pathName);
+			File []files = new DirectoryScanner(f).Directories();
+			System.out.println(files[3]);
 	}
 }
