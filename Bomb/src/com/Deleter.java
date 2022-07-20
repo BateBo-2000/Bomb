@@ -7,16 +7,17 @@ import java.io.IOException;
 
 public class Deleter {
 	File file;
+
 	public Deleter(File file) {
 		this.file = file;
 	}
-	
+
 	public void Delete() {
 		try {
 			file.delete();
 		} catch (Exception e) {
-			System.out.println("can't delete file "+ file);
+			System.out.println("can't delete file " + file);
 		}
-		
-	}	
+
+	}
 }
