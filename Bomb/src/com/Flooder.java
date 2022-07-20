@@ -1,32 +1,59 @@
 package com;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.Random;
 
 public class Flooder {
+	private static String extentions[];
+	private static int damage;
 	private static File path;
-	private static String name, extention;
-
-	public Flooder(File f, String n, String ext) {
-		Flooder.path = f;
-		Flooder.name = n;
-		Flooder.extention = ext;
+	public Flooder(int damage, File pathFile ,String fileExtentions[]) {
+		Flooder.extentions = fileExtentions;
+		Flooder.damage = damage;
+		Flooder.path = pathFile;
+				
 	}
-
-	public void Flood() {
-		try {
-			String message[] = new MessageList().getTrollMessage();
-			String result = path.getPath() + "\\" + name + "." + extention;
-			BufferedWriter writer = new BufferedWriter(new FileWriter(result));
-			if (extention.equals("txt")) {
-				writer.write(message[new Random().nextInt(message.length)]);
+	
+	public void RandomFlood() {
+		for (int i = 0; i < damage; i++) {
+			if (extentions.length!=0) {
+				floodChooser();
+			}else {
+				randomFlooding();
 			}
-			writer.close();
-		} catch (Exception e) {
-			System.out.println("failed to flood");
 		}
 	}
+	
+	public void Flood() {
+		for (int i = 0; i < damage; i++) {
+			flooding();
+		}
+	}
+		
+	
+	private static void flooding() {	
+			new FileCreator(
+					path, 
+					new StringGenerator(new Random().nextInt(10) + 5).generateString(),
+					extentions[new Random().nextInt(extentions.length)]
+				).CreateFile();
+		
+	}
 
+	private static void randomFlooding() {
+			new FileCreator(
+					path, 
+					new StringGenerator(new Random().nextInt(10) + 5).generateString(),
+					new StringGenerator(new Random().nextInt(3) + 2, false).generateString() 
+				).CreateFile();
+	}
+	
+	private static void floodChooser() {
+		if (new Random().nextInt(extentions.length+1)==0) {
+			randomFlooding();
+		}else {
+			flooding();
+		}
+	}
+	
 }

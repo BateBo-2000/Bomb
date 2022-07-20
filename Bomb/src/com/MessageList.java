@@ -2,7 +2,7 @@ package com;
 
 public class MessageList {
 
-	String trollMessage[] = { "Yo mama's so fat, when she fell I didn't laugh, but the sidewalk cracked up.\r\n",
+	 private static String trollMessage[] = { "Yo mama's so fat, when she fell I didn't laugh, but the sidewalk cracked up.\r\n",
 			"Yo mama's so fat, when she skips a meal, the stock market drops.\r\n",
 			"Yo mama's so fat, it took me two buses and a train to get to her good side.\r\n",
 			"Yo mama's so fat, when she goes camping, the bears hide their food.\r\n",

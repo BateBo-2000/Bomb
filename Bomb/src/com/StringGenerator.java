@@ -31,9 +31,14 @@ public class StringGenerator {
 	public String generateString() {
 		Random rng = new Random();
 		String result = "";
-		int usableRange = charRightLimit - charLeftLimit;
+		int usableRange = charRightLimit - charLeftLimit , temp;
+		
 		for (int i = 0; i < stringLength + 1; i++) {
-			result += Character.toString((char) (rng.nextInt(usableRange) + charLeftLimit));
+			temp = rng.nextInt(usableRange) + charLeftLimit;
+			if (temp>96 || temp<91) {
+					result += Character.toString((char)temp);
+			}
+			
 		}
 		return result;
 	}

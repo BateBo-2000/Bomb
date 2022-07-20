@@ -4,6 +4,7 @@
 package com;
 
 import java.io.File;
+import java.util.Random;
 
 public class testingRandomStuff {
 	public static void main(String[] args) {
@@ -12,13 +13,8 @@ public class testingRandomStuff {
 		String pathName = "C:\\Users\\PC\\Desktop\\test\\1";
 
 		File f = new File(pathName);
-		File listFile[] = f.listFiles();
-
-		for (File file : listFile) {
-			System.out.println(file.getPath());
-		}
-		DeleteController deleteController = new DeleteController(f, 50);
-		deleteController.DeleteRandomStuff();
-
+		// random percent damage delete
+		DamageGenerator damageGenerator = new DamageGenerator(10, f, new String[]{"asdf"},true , 10 , false , true);
+		damageGenerator.DoDamage();
 	}
 }
