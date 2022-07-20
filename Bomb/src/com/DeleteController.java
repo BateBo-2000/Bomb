@@ -5,12 +5,12 @@ import java.io.File;
 import java.util.Random;
 
 public class DeleteController {
-	File pathFile;
-	int damage;
+	private static File pathFile;
+	private static int damage;
 
 	public DeleteController(File f, int percentDamage) {
-		this.pathFile = f;
-		this.damage = percentDamage;
+		DeleteController.pathFile = f;
+		DeleteController.damage = percentDamage;
 	}
 
 	public void DeleteRandomStuff() {

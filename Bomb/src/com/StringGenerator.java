@@ -3,7 +3,7 @@ package com;
 import java.util.Random;
 
 public class StringGenerator {
-	int stringLength, charLeftLimit = 65, charRightLimit = 123;
+	private static int stringLength, charLeftLimit = 65, charRightLimit = 123;
 
 	public StringGenerator(int length, int leftLimit, int rightlimit) {
 		stringLength = length;

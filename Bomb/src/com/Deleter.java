@@ -1,15 +1,12 @@
 package com;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Deleter {
-	File file;
+	private static File file;
 
 	public Deleter(File file) {
-		this.file = file;
+		Deleter.file = file;
 	}
 
 	public void Delete() {

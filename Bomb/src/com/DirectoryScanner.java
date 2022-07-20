@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 
 public class DirectoryScanner {
-	File file;
+	private static File file;
 
 	public DirectoryScanner(File f) {
 		file = f;

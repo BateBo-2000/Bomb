@@ -1,20 +1,18 @@
 package com;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.Random;
 
 public class Flooder {
-	File path;
-	String name, extention;
+	private static File path;
+	private static String name, extention;
 
 	public Flooder(File f, String n, String ext) {
-		this.path = f;
-		this.name = n;
-		this.extention = ext;
+		Flooder.path = f;
+		Flooder.name = n;
+		Flooder.extention = ext;
 	}
 
 	public void Flood() {
