@@ -6,29 +6,11 @@ import java.util.Random;
 
 public class DamageGenerator {
 	private static int damage, percent;
-	private static String message[], extentions[];
+	private static String extentions[];
 	private static File path;
 	private static boolean random = false, doomsDayMode = false, delete = false;
 
-	public DamageGenerator(int damage, File path, String extentions[], String trollMessage[], boolean random, int percent, boolean doomsday, boolean delete) {
-		DamageGenerator.damage = damage;
-		DamageGenerator.path = path;
-		DamageGenerator.extentions = extentions;
-		DamageGenerator.random = random;
-		DamageGenerator.doomsDayMode = doomsday;
-		DamageGenerator.delete = delete;
-		DamageGenerator.message = trollMessage;
-		DamageGenerator.percent = percent;
-	}
-
-	public DamageGenerator(int damage, File path, String extentions[], String trollMessage[]) {
-		DamageGenerator.damage = damage;
-		DamageGenerator.path = path;
-		DamageGenerator.extentions = extentions;
-		DamageGenerator.message = trollMessage;
-	}
-
-	public DamageGenerator(int damage, File path, String extentions[], boolean random, int percent, boolean doomsday, boolean delete) {
+	public DamageGenerator(int damage, File path, String extentions[], boolean random, int percent, boolean delete, boolean doomsday) {
 		DamageGenerator.damage = damage;
 		DamageGenerator.path = path;
 		DamageGenerator.extentions = extentions;

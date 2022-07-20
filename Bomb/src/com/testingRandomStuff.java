@@ -14,7 +14,7 @@ public class testingRandomStuff {
 
 		File f = new File(pathName);
 		// random percent damage delete
-		DamageGenerator damageGenerator = new DamageGenerator(10, f, new String[]{"asdf"},true , 10 , false , true);
+		DamageGenerator damageGenerator = new DamageGenerator(10, f, new String[]{"asdf"},true , 10 , true , true);
 		damageGenerator.DoDamage();
 	}
 }

