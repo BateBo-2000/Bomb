@@ -282,7 +282,7 @@ public class Main extends JFrame {
 						System.out.println("Boom!");
 					} catch (Exception e2) {
 						System.out.println(e2);
-						JOptionPane.showConfirmDialog(null , e2);
+						JOptionPane.showInternalMessageDialog(null, e2);
 					}
 					
 					

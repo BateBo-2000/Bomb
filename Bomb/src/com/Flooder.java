@@ -52,16 +52,31 @@ public class Flooder {
 	}
 	
 	private static void floodChooser() {
-		if (folders && new Random().nextInt(extentions.length+1)==0) {
-			String temp = path.getPath()+"\\"+new StringGenerator(10).generateString();
-			new File(temp).mkdir();
-		}else {
-			if (random && new Random().nextInt(extentions.length+1)==0) {
-				randomFlooding();
+		if (extentions.length == 0) {
+			if (folders && new Random().nextBoolean()) {
+				String temp = path.getPath()+"\\"+new StringGenerator(10).generateString();
+				new File(temp).mkdir();
 			}else {
-				flooding();
+				if (random && new Random().nextBoolean()) {
+					randomFlooding();
+				}else {
+					flooding();
+				}
+			}
+		}else {
+			if (folders && new Random().nextInt(extentions.length)==0) {
+				String temp = path.getPath()+"\\"+new StringGenerator(10).generateString();
+				new File(temp).mkdir();
+			}else {
+				if (random && new Random().nextInt(extentions.length)==0) {
+					randomFlooding();
+				}else {
+					flooding();
+				}
 			}
 		}
+		
+		
 		
 	}
 	
