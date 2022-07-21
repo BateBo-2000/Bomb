@@ -4,8 +4,6 @@ package com;
 import java.io.File;
 import java.util.Random;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
-
 public class DeleteController {
 	private static File pathFile;
 	private static int percent;

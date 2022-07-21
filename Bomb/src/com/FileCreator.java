@@ -7,20 +7,20 @@ import java.util.Random;
 
 public class FileCreator {
 	private static File path;
-	private static String name, extention;
+	private static String name, extension;
 
 	public FileCreator(File f, String n, String ext) {
 		FileCreator.path = f;
 		FileCreator.name = n;
-		FileCreator.extention = ext;
+		FileCreator.extension = ext;
 	}
 
 	public void CreateFile() {
 		try {
 			String message[] = new MessageList().getTrollMessage();
-			String result = path.getPath() + "\\" + name + "." + extention;
+			String result = path.getPath() + "\\" + name + "." + extension;
 			BufferedWriter writer = new BufferedWriter(new FileWriter(result));
-			if (extention.equals("txt")) {
+			if (extension.equals("txt")) {
 				writer.write(message[new Random().nextInt(message.length)]);
 			}
 			writer.close();
