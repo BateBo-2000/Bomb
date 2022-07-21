@@ -8,12 +8,13 @@ public class Flooder {
 	private static String extentions[];
 	private static int damage;
 	private static File path;
-	private static boolean folders = false;
-	public Flooder(int damage, File pathFile ,String fileExtentions[], boolean folders) {
+	private static boolean folders = false, random = false;
+	public Flooder(int damage, File pathFile ,String fileExtentions[], boolean folders, boolean random) {
 		Flooder.extentions = fileExtentions;
 		Flooder.damage = damage;
 		Flooder.path = pathFile;
 		Flooder.folders = folders;
+		Flooder.random = random;
 	}
 	
 	public void RandomFlood() {
@@ -55,7 +56,7 @@ public class Flooder {
 			String temp = path.getPath()+"\\"+new StringGenerator(10).generateString();
 			new File(temp).mkdir();
 		}else {
-			if (new Random().nextInt(extentions.length+1)==0) {
+			if (random && new Random().nextInt(extentions.length+1)==0) {
 				randomFlooding();
 			}else {
 				flooding();

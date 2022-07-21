@@ -33,7 +33,7 @@ public class DamageGenerator {
 		if (doomsDayMode) {
 			damage *= (extensions.length + 1);
 		}
-		Flooder flooder = new Flooder(damage, path, extensions, folders);
+		Flooder flooder = new Flooder(damage, path, extensions, folders, random);
 		if (random) {
 			flooder.RandomFlood();
 		} else {

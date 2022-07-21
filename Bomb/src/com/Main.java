@@ -299,7 +299,6 @@ public class Main extends JFrame {
 		for (int i = 0; i < extensions.size(); i++) {
 			extensionString[i] = extensions.get(i);
 		}
-		
 		new Controller(path, damage, extensionString, random, delete, percent, folders, doomsday).Nuke();;
 	}
 }
