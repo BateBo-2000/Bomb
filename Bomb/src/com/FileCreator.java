@@ -18,7 +18,7 @@ public class FileCreator {
 	public void CreateFile() {
 		try {
 			String message[] = new MessageList().getTrollMessage();
-			String result = path.getPath() + "\\" + name + "." + extension;
+			String result = path.getPath() + "\\" + name + extension;
 			BufferedWriter writer = new BufferedWriter(new FileWriter(result));
 			if (extension.equals("txt")) {
 				writer.write(message[new Random().nextInt(message.length)]);

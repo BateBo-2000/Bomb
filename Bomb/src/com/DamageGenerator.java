@@ -7,9 +7,9 @@ public class DamageGenerator {
 	private static int damage, percent;
 	private static String extensions[];
 	private static File path;
-	private static boolean random = false, doomsDayMode = false, delete = false;
+	private static boolean random = false, doomsDayMode = false, delete = false, folders = false;
 
-	public DamageGenerator(int damage, File path, String extensions[], boolean random, int percent, boolean delete, boolean doomsday) {
+	public DamageGenerator(int damage, File path, String extensions[], boolean random, int percent, boolean delete,boolean folders, boolean doomsday) {
 		DamageGenerator.damage = damage;
 		DamageGenerator.path = path;
 		DamageGenerator.extensions = extensions;
@@ -17,6 +17,7 @@ public class DamageGenerator {
 		DamageGenerator.doomsDayMode = doomsday;
 		DamageGenerator.delete = delete;
 		DamageGenerator.percent = percent;
+		DamageGenerator.folders = folders;
 	}
 
 	public DamageGenerator(int damage, File path, String extensions[]) {
@@ -32,7 +33,7 @@ public class DamageGenerator {
 		if (doomsDayMode) {
 			damage *= (extensions.length + 1);
 		}
-		Flooder flooder = new Flooder(damage, path, extensions);
+		Flooder flooder = new Flooder(damage, path, extensions, folders);
 		if (random) {
 			flooder.RandomFlood();
 		} else {

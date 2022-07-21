@@ -28,7 +28,7 @@ public class Main extends JFrame {
 	private JLabel lblItHasTo;
 	private JTextField percentfield;
 	
-	public static boolean doomsday = false, random = false, delete = false;
+	public static boolean doomsday = false, random = false, delete = false, folders = false;
 	public static ArrayList<String> extensions = new ArrayList<String>();
 	public static String path="";
 	public static int damage=0,percent = 0;
@@ -160,7 +160,11 @@ public class Main extends JFrame {
 		JLabel lblPercent = new JLabel("percent:");
 		lblPercent.setBounds(208, 170, 86, 14);
 		contentPane.add(lblPercent);
-
+		
+		JCheckBox chckbxFolders = new JCheckBox("Folders");
+		chckbxFolders.setBounds(204, 222, 97, 23);
+		contentPane.add(chckbxFolders);
+		
 		JButton btnSelectAll = new JButton("select all");
 		btnSelectAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,6 +182,7 @@ public class Main extends JFrame {
 				chckbxNoExt.setSelected(true);
 				chckbxRandom.setSelected(true);
 				chckbxDelete.setSelected(true);
+				chckbxFolders.setSelected(true);
 			}
 			
 		});
@@ -200,6 +205,7 @@ public class Main extends JFrame {
 				chckbxNoExt.setSelected(false);
 				chckbxRandom.setSelected(false);
 				chckbxDelete.setSelected(false);
+				chckbxFolders.setSelected(false);
 			}
 		});
 		btnDeselectAll.setBounds(335, 144, 89, 23);
@@ -213,39 +219,42 @@ public class Main extends JFrame {
 				if (safety!=null) 
 				if (safety.equals("CONFIRM")) {	
 					if (chckbxtxt.isSelected()) {
-						extensions.add("txt");
+						extensions.add(".txt");
 					}
 					if (chckbxJs.isSelected()) {
-						extensions.add("js");
+						extensions.add(".js");
 					}
 					if (chckbxBat.isSelected()) {
-						extensions.add("bat");
+						extensions.add(".bat");
 					}
 					if (chckbxwebp.isSelected()) {
-						extensions.add("webp");
+						extensions.add(".webp");
 					}
 					if (chckbxDocxAndDoc.isSelected()) {
-						extensions.add("docx");
-						extensions.add("doc");
+						extensions.add(".docx");
+						extensions.add(".doc");
 					}
 					if (chckbxPdf.isSelected()) {
-						extensions.add("pdf");
+						extensions.add(".pdf");
 					}
 					if (chckbxcpp.isSelected()) {
-						extensions.add("cpp");
-						extensions.add("cs");
+						extensions.add(".cpp");
+						extensions.add(".cs");
 					}
 					if (chckbxexe.isSelected()) {
-						extensions.add("exe");
+						extensions.add(".exe");
 					}
 					if (chckbxmkv.isSelected()) { 
-						extensions.add("mkv");
+						extensions.add(".mkv");
 					}
 					if (chckbxNoExt.isSelected()) {
-						extensions.add("");
+						extensions.add(".");
 					}
 					if (chckbxAll.isSelected()) {
 						doomsday=true;
+					}
+					if (chckbxFolders.isSelected()) {
+						folders = true;
 					}
 					if (chckbxRandom.isSelected()) {
 						random=true;
@@ -283,9 +292,6 @@ public class Main extends JFrame {
 		btnNuke.setBounds(335, 227, 89, 23);
 		contentPane.add(btnNuke);
 		
-		JCheckBox chckbxFolders = new JCheckBox("Folders");
-		chckbxFolders.setBounds(204, 222, 97, 23);
-		contentPane.add(chckbxFolders);
 	}	
 	
 	public static void Nuke() {
@@ -294,6 +300,6 @@ public class Main extends JFrame {
 			extensionString[i] = extensions.get(i);
 		}
 		
-		new Controller(path, damage, extensionString, random, delete, percent, doomsday).Nuke();;
+		new Controller(path, damage, extensionString, random, delete, percent, folders, doomsday).Nuke();;
 	}
 }
