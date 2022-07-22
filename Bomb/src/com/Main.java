@@ -1,12 +1,12 @@
 
 package com;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -15,9 +15,7 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Random;
 import java.awt.event.ActionEvent;
 
 
@@ -28,12 +26,13 @@ public class Main extends JFrame {
 	private JLabel lblExample;
 	private JTextField textdmg;
 	private JLabel lblItHasTo;
-
+	private JTextField percentfield;
 	
-	public boolean allXDmg = false, Random = false;
-	ArrayList<String> extensions =new ArrayList<String>();
+	public static boolean doomsday = false, random = false, delete = false, folders = false;
+	public static ArrayList<String> extensions = new ArrayList<String>();
 	public static String path="";
-	public static int damage=0;
+	public static int damage=0,percent = 0;
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -90,9 +89,9 @@ public class Main extends JFrame {
 		contentPane.add(chckbxtxt);
 		chckbxtxt.setSelected(true);
 		
-		JCheckBox chckbxFolders = new JCheckBox("folders");
-		chckbxFolders.setBounds(6, 144, 97, 23);
-		contentPane.add(chckbxFolders);
+		JCheckBox chckbxNoExt = new JCheckBox("no ext");
+		chckbxNoExt.setBounds(6, 144, 97, 23);
+		contentPane.add(chckbxNoExt);
 		
 		JCheckBox chckbxJs = new JCheckBox(".js");
 		chckbxJs.setBounds(6, 170, 97, 23);
@@ -149,6 +148,23 @@ public class Main extends JFrame {
 		lblSelectIfYou.setBounds(335, 210, 99, 14);
 		contentPane.add(lblSelectIfYou);
 		
+		JCheckBox chckbxDelete = new JCheckBox("delete");
+		chckbxDelete.setBounds(204, 144, 97, 23);
+		contentPane.add(chckbxDelete);
+		
+		percentfield = new JTextField();
+		percentfield.setBounds(208, 183, 86, 20);
+		contentPane.add(percentfield);
+		percentfield.setColumns(10);
+
+		JLabel lblPercent = new JLabel("percent:");
+		lblPercent.setBounds(208, 170, 86, 14);
+		contentPane.add(lblPercent);
+		
+		JCheckBox chckbxFolders = new JCheckBox("Folders");
+		chckbxFolders.setBounds(204, 222, 97, 23);
+		contentPane.add(chckbxFolders);
+		
 		JButton btnSelectAll = new JButton("select all");
 		btnSelectAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -163,8 +179,10 @@ public class Main extends JFrame {
 				chckbxwebp.setSelected(true);
 				chckbxBat.setSelected(true);
 				chckbxJs.setSelected(true);
-				chckbxFolders.setSelected(true);
+				chckbxNoExt.setSelected(true);
 				chckbxRandom.setSelected(true);
+				chckbxDelete.setSelected(true);
+				chckbxFolders.setSelected(true);
 			}
 			
 		});
@@ -184,9 +202,10 @@ public class Main extends JFrame {
 				chckbxwebp.setSelected(false);
 				chckbxBat.setSelected(false);
 				chckbxJs.setSelected(false);
-				chckbxFolders.setSelected(false);
+				chckbxNoExt.setSelected(false);
 				chckbxRandom.setSelected(false);
-				
+				chckbxDelete.setSelected(false);
+				chckbxFolders.setSelected(false);
 			}
 		});
 		btnDeselectAll.setBounds(335, 144, 89, 23);
@@ -225,20 +244,27 @@ public class Main extends JFrame {
 					if (chckbxexe.isSelected()) {
 						extensions.add(".exe");
 					}
-					if (chckbxmkv.isSelected()) {
+					if (chckbxmkv.isSelected()) { 
 						extensions.add(".mkv");
 					}
-					if (chckbxFolders.isSelected()) {
-						extensions.add("");
+					if (chckbxNoExt.isSelected()) {
+						extensions.add(".");
 					}
 					if (chckbxAll.isSelected()) {
-						allXDmg=true;
+						doomsday=true;
+					}
+					if (chckbxFolders.isSelected()) {
+						folders = true;
 					}
 					if (chckbxRandom.isSelected()) {
-						Random=true;
+						random=true;
 					}
 					if (extensions.size()==0 && chckbxRandom.isSelected()==false) {
 						chckbxtxt.setSelected(true);
+					}
+					if (chckbxDelete.isSelected()) {
+						percent = Integer.parseInt(percentfield.getText());
+						delete = true;
 					}
 					System.out.println(extensions);
 					//closes the window after clicking next
@@ -247,11 +273,23 @@ public class Main extends JFrame {
 					path = pathField.getText();
 					try {	
 						damage = Integer.parseInt(textdmg.getText());
+						
+						try {
+							Nuke();
+							System.out.println("Boom!");
+						} catch (Exception e2) {
+							System.out.println(e2);
+							JOptionPane.showInternalMessageDialog(null, e2);
+						}
+						
+						
 					} catch (Exception e2) {
 						System.out.println("incorrect number");
 					}
-					NUKE();
-					System.out.println("Boom!");
+					
+					
+					
+					
 				}
 			}
 		});
@@ -260,13 +298,11 @@ public class Main extends JFrame {
 		
 	}	
 	
-	public void NUKE() {
-		//creates a 
-		Util utility = new Util();
-		File file=new File(path);		
-		//starts the controller at the start location
-		utility.Controler(file,damage,utility.messageList(),extensions, allXDmg, Random);	
-		
-		
+	public static void Nuke() {
+		String extensionString[] = new String[extensions.size()];
+		for (int i = 0; i < extensions.size(); i++) {
+			extensionString[i] = extensions.get(i);
+		}
+		new Controller(path, damage, extensionString, random, delete, percent, folders, doomsday).Nuke();;
 	}
 }
