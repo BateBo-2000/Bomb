@@ -36,6 +36,6 @@ public class DamageGenerator {
 		}
 		Flooder flooder = new Flooder(damage, path, extensions, folders, random);
 		flooder.Flood();
-
 	}
+	
 }

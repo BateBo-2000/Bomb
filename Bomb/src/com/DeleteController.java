@@ -14,10 +14,9 @@ public class DeleteController {
 	}
 
 	public void DeleteRandomStuff() {
-
 		File list[] = pathFile.listFiles();
-
-		if (list.length!=0) {
+		
+		if (list.length > 0) {
 			Random rng = new Random();
 			
 			for (int i = 0; i < list.length; i++) {
@@ -25,6 +24,6 @@ public class DeleteController {
 					new Deleter(list[i]).Delete();
 				}
 			}
-		}
+		} 	
 	}
 }
