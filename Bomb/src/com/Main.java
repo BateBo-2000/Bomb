@@ -273,17 +273,21 @@ public class Main extends JFrame {
 					path = pathField.getText();
 					try {	
 						damage = Integer.parseInt(textdmg.getText());
+						
+						try {
+							Nuke();
+							System.out.println("Boom!");
+						} catch (Exception e2) {
+							System.out.println(e2);
+							JOptionPane.showInternalMessageDialog(null, e2);
+						}
+						
+						
 					} catch (Exception e2) {
 						System.out.println("incorrect number");
 					}
 					
-					try {
-						Nuke();
-						System.out.println("Boom!");
-					} catch (Exception e2) {
-						System.out.println(e2);
-						JOptionPane.showInternalMessageDialog(null, e2);
-					}
+					
 					
 					
 				}

@@ -28,7 +28,8 @@ public class DamageGenerator {
 
 	public void DoDamage() {
 		if (delete) {
-			Deleting();
+			DeleteController deleteController = new DeleteController(path, percent);
+			deleteController.DeleteRandomStuff();
 		}
 		if (doomsDayMode) {
 			damage *= (extensions.length + 1);
@@ -36,10 +37,5 @@ public class DamageGenerator {
 		Flooder flooder = new Flooder(damage, path, extensions, folders, random);
 		flooder.Flood();
 
-	}
-
-	private static void Deleting() {
-		DeleteController deleteController = new DeleteController(path, percent);
-		deleteController.DeleteRandomStuff();
 	}
 }

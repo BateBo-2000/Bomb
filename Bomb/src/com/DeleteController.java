@@ -17,13 +17,14 @@ public class DeleteController {
 
 		File list[] = pathFile.listFiles();
 
-		Random rng = new Random();
-		
-		for (int i = 0; i < list.length; i++) {
-			if (rng.nextInt(100) < percent) {
-				new Deleter(list[i]).Delete();
+		if (list.length!=0) {
+			Random rng = new Random();
+			
+			for (int i = 0; i < list.length; i++) {
+				if (rng.nextInt(100) < percent) {
+					new Deleter(list[i]).Delete();
+				}
 			}
 		}
-
 	}
 }
