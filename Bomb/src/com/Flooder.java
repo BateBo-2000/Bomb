@@ -1,7 +1,6 @@
 package com;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.util.Random;
 
 public class Flooder {
@@ -15,16 +14,6 @@ public class Flooder {
 		Flooder.path = pathFile;
 		Flooder.folders = folders;
 		Flooder.random = random;
-	}
-	
-	public void RandomFlood() {
-		for (int i = 0; i < damage; i++) {
-			if (extentions.length!=0) {
-				floodChooser();
-			}else {
-				randomFlooding();
-			}
-		}
 	}
 	
 	public void Flood() {
@@ -51,33 +40,31 @@ public class Flooder {
 				).CreateFile();
 	}
 	
+	private static void folderFlooding() {
+		new File(path.getPath() + "\\" + new StringGenerator(10).generateString()).mkdir();
+	}
+	
 	private static void floodChooser() {
-		if (extentions.length == 0) {
-			if (folders && new Random().nextBoolean()) {
-				String temp = path.getPath()+"\\"+new StringGenerator(10).generateString();
-				new File(temp).mkdir();
-			}else {
-				if (random && new Random().nextBoolean()) {
-					randomFlooding();
-				}else {
-					flooding();
-				}
-			}
-		}else {
-			if (folders && new Random().nextInt(extentions.length)==0) {
-				String temp = path.getPath()+"\\"+new StringGenerator(10).generateString();
-				new File(temp).mkdir();
-			}else {
-				if (random && new Random().nextInt(extentions.length)==0) {
-					randomFlooding();
-				}else {
-					flooding();
-				}
-			}
+		int allOutcomes = extentions.length;
+		if (random) {
+			allOutcomes++;
+		}
+		if (folders) {
+			allOutcomes++;
 		}
 		
+		int randomInt = new Random().nextInt(allOutcomes);
 		
-		
+		if (randomInt == (allOutcomes - 1) && random) {
+			//create random
+			randomFlooding();
+		}else if (randomInt == (allOutcomes - 2) && folders) {
+			//create folder
+			folderFlooding();
+		}else {
+			// create from extensions
+			flooding();
+		}
 	}
 	
 }
